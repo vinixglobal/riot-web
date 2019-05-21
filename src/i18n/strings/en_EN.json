@@ -3,7 +3,7 @@
     "Unknown device": "Unknown device",
     "%(appName)s via %(browserName)s on %(osName)s": "%(appName)s via %(browserName)s on %(osName)s",
     "You need to be using HTTPS to place a screen-sharing call.": "You need to be using HTTPS to place a screen-sharing call.",
-    "powered by Matrix": "powered by Matrix",
+    "powered by Matrix": "powered by Vinix",
     "Custom Server Options": "Custom Server Options",
     "You can use the custom server options to sign into other Matrix servers by specifying a different homeserver URL. This allows you to use Riot with an existing Matrix account on a different homeserver.": "You can use the custom server options to sign into other Matrix servers by specifying a different homeserver URL. This allows you to use Riot with an existing Matrix account on a different homeserver.",
     "You can also set a custom identity server, but you won't be able to invite users by email address, or be invited by email address yourself.": "You can also set a custom identity server, but you won't be able to invite users by email address, or be invited by email address yourself.",

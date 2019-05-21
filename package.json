@@ -1,8 +1,8 @@
 {
-  "name": "riot-web",
-  "productName": "Riot",
+  "name": "vinix-blast",
+  "productName": "Vinix Blast",
   "main": "electron_app/src/electron-main.js",
-  "version": "1.0.5",
+  "version": "0.0.1",
   "description": "A feature-rich client for Matrix.org",
   "author": "New Vector Ltd.",
   "repository": {
@@ -26,6 +26,7 @@
   "style": "bundle.css",
   "matrix-react-parent": "matrix-react-sdk",
   "scripts": {
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=electron_app/build/icon.icns --prune=true --out=release-builds --electron-version=1.6.2",
     "reskindex": "reskindex -h src/header",
     "reskindex:watch": "reskindex -h src/header -w",
     "i18n": "matrix-gen-i18n",
@@ -60,11 +61,15 @@
     "test-multi": "karma start"
   },
   "dependencies": {
+    "acorn-jsx": "^5.0.1",
+    "auto-launch": "^5.0.5",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "bluebird": "^3.5.2",
     "browser-request": "^0.3.3",
     "draft-js": "^0.11.0-alpha",
+    "electron-store": "^3.2.0",
+    "electron-window-state": "^5.0.3",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "favico.js": "^0.3.10",
     "gemini-scrollbar": "github:matrix-org/gemini-scrollbar#b302279",
@@ -74,6 +79,7 @@
     "matrix-react-sdk": "1.0.5",
     "modernizr": "^3.6.0",
     "olm": "https://matrix.org/packages/npm/olm/olm-3.1.0-pre1.tgz",
+    "png-to-ico": "^2.0.2",
     "prop-types": "^15.6.2",
     "react": "^15.6.0",
     "react-dom": "^15.6.0",
@@ -102,9 +108,12 @@
     "cpx": "^1.3.2",
     "cross-env": "^4.0.0",
     "css-loader": "^2.1.0",
-    "electron-builder": "^20.38.5",
-    "electron-builder-squirrel-windows": "^20.38.5",
+    "electron": "^5.0.1",
+    "electron-builder": "^20.40.2",
+    "electron-builder-squirrel-windows": "^20.41.0",
     "electron-devtools-installer": "^2.2.4",
+    "electron-installer-dmg": "^2.0.0",
+    "electron-packager": "^13.1.1",
     "emojione": "^2.2.7",
     "eslint": "^5.8.0",
     "eslint-config-google": "^0.7.1",
@@ -149,7 +158,7 @@
     "webpack-dev-server": "^3.1.11"
   },
   "build": {
-    "appId": "im.riot.app",
+    "appId": "im.vinix",
     "electronVersion": "4.0.8",
     "files": [
       "node_modules/**",
@@ -165,11 +174,12 @@
       "category": "Network;InstantMessaging;Chat",
       "maintainer": "support@riot.im",
       "desktop": {
-        "StartupWMClass": "riot"
+        "StartupWMClass": "vinix"
       }
     },
     "mac": {
-      "category": "public.app-category.social-networking"
+      "category": "public.app-category.social-networking",
+      "target": "dmg"
     },
     "win": {
       "target": {

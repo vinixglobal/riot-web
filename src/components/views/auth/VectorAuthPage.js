@@ -14,59 +14,63 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-'use strict';
+"use strict";
 
-import React from 'react';
-import sdk from 'matrix-react-sdk/lib/index';
-import SdkConfig from 'matrix-react-sdk/lib/SdkConfig';
+import React from "react";
+import sdk from "matrix-react-sdk/lib/index";
+import SdkConfig from "matrix-react-sdk/lib/SdkConfig";
+//
 
 export default class VectorAuthPage extends React.PureComponent {
-    static replaces = 'AuthPage'
+    static replaces = "AuthPage";
 
     render() {
-        const AuthFooter = sdk.getComponent('auth.AuthFooter');
+        const AuthFooter = sdk.getComponent("auth.AuthFooter");
 
         const brandingConfig = SdkConfig.get().branding;
-        let backgroundUrl = "themes/riot/img/backgrounds/valley.jpg";
+        console.log("THIS IS BRANDING FOR SDK CONFIG", brandingConfig);
+        let backgroundUrl = "themes/riot/img/backgrounds/fist-bump.jpg";
         if (brandingConfig && brandingConfig.welcomeBackgroundUrl) {
             backgroundUrl = brandingConfig.welcomeBackgroundUrl;
         }
 
         const pageStyle = {
-            background: `center/cover fixed url(${backgroundUrl})`,
+            background: `center/cover fixed url(${backgroundUrl})`
         };
 
         const modalStyle = {
-            position: 'relative',
-            background: 'initial',
+            position: "relative",
+            background: "initial"
         };
 
         const blurStyle = {
-            position: 'absolute',
+            position: "absolute",
             top: 0,
             right: 0,
             bottom: 0,
             left: 0,
-            filter: 'blur(10px)',
-            background: pageStyle.background,
+            filter: "blur(10px)",
+            background: pageStyle.background
         };
 
         const modalContentStyle = {
-            display: 'flex',
+            display: "flex",
             zIndex: 1,
-            background: 'rgba(255, 255, 255, 0.59)',
-            borderRadius: '4px',
+            background: "rgba(255, 255, 255, 0.59)",
+            borderRadius: "4px"
         };
 
         return (
             <div className="mx_AuthPage" style={pageStyle}>
                 <div className="mx_AuthPage_modal" style={modalStyle}>
-                    <div className="mx_AuthPage_modalBlur" style={blurStyle}></div>
-                    <div className="mx_AuthPage_modalContent" style={modalContentStyle}>
-                        { this.props.children }
+                    <div className="mx_AuthPage_modalBlur" style={blurStyle} />
+                    <div
+                        className="mx_AuthPage_modalContent"
+                        style={modalContentStyle}
+                    >
+                        {this.props.children}
                     </div>
                 </div>
-                <AuthFooter />
             </div>
         );
     }
