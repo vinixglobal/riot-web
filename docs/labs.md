@@ -45,3 +45,7 @@ Once enabled, send a custom state event to a room to set values:
 ```
 
 That's it. Now should see your new counter under the header.
+
+## Multiple integration managers (`feature_many_integration_managers`)
+
+Exposes a way to access all the integration managers known to Riot. This is an implementation of [MSC1957](https://github.com/matrix-org/matrix-doc/pull/1957).

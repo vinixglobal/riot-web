@@ -100,6 +100,16 @@ export default class ElectronPlatform extends VectorBasePlatform {
 
         this.startUpdateCheck = this.startUpdateCheck.bind(this);
         this.stopUpdateCheck = this.stopUpdateCheck.bind(this);
+
+        this._tryPersistStorage();
+    }
+
+    async _tryPersistStorage() {
+        if (navigator.storage && navigator.storage.persist) {
+            const granted = await navigator.storage.persist();
+            const persisted = await navigator.storage.persisted();
+            console.log("Storage persist request granted: " + granted + " persisted: " + persisted);
+        }
     }
 
     async getConfig(): Promise<{}> {
@@ -174,7 +184,7 @@ export default class ElectronPlatform extends VectorBasePlatform {
     }
 
     async getAppVersion(): Promise<string> {
-        return await this._ipcCall('getAppVersion');
+        return this._ipcCall('getAppVersion');
     }
 
     supportsAutoLaunch(): boolean {
@@ -182,23 +192,36 @@ export default class ElectronPlatform extends VectorBasePlatform {
     }
 
     async getAutoLaunchEnabled(): boolean {
-        return await this._ipcCall('getAutoLaunchEnabled');
+        return this._ipcCall('getAutoLaunchEnabled');
     }
 
     async setAutoLaunchEnabled(enabled: boolean): void {
-        return await this._ipcCall('setAutoLaunchEnabled', enabled);
+        return this._ipcCall('setAutoLaunchEnabled', enabled);
     }
 
-    supportsMinimizeToTray(): boolean {
+    supportsAutoHideMenuBar(): boolean {
         return true;
     }
 
+    async getAutoHideMenuBarEnabled(): boolean {
+        return this._ipcCall('getAutoHideMenuBarEnabled');
+    }
+
+    async setAutoHideMenuBarEnabled(enabled: boolean): void {
+        return this._ipcCall('setAutoHideMenuBarEnabled', enabled);
+    }
+
+    supportsMinimizeToTray(): boolean {
+        // Things other than Mac support tray icons
+        return !navigator.platform.toUpperCase().includes('MAC');
+    }
+
     async getMinimizeToTrayEnabled(): boolean {
-        return await this._ipcCall('getMinimizeToTrayEnabled');
+        return this._ipcCall('getMinimizeToTrayEnabled');
     }
 
     async setMinimizeToTrayEnabled(enabled: boolean): void {
-        return await this._ipcCall('setMinimizeToTrayEnabled', enabled);
+        return this._ipcCall('setMinimizeToTrayEnabled', enabled);
     }
 
     async canSelfUpdate(): boolean {
